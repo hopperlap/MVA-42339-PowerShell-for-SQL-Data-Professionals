@@ -11,11 +11,11 @@ join sys.databases d on (sp.sid = d.owner_sid)
 group by sp.name
 '@
 
-Invoke-Sqlcmd -ServerInstance PICARD -Database tempdb -Query $sql
+Invoke-Sqlcmd -ServerInstance localhost -Database tempdb -Query $sql -Username sa -Password Sample123$
 
 #compare to sqlcmd
-$sqlcmdout = sqlcmd -S PICARD -d tempdb -Q $sql
-$invokesqlout = Invoke-Sqlcmd -ServerInstance PICARD -Database tempdb -Query $sql
+$sqlcmdout = sqlcmd -S localhost -d tempdb -Q $sql
+$invokesqlout = Invoke-Sqlcmd -ServerInstance localhost -Database tempdb -Query $sql -Username sa -Password Sample123$
 
 $sqlcmdout
 $invokesqlout
